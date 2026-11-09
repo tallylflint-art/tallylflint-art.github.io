@@ -10,5 +10,11 @@ window.ANTISCAM_SCAM_NUMBERS = [
     "label": "Fake $800 Daylendzone loan text — loan bait asking you to verify to proceed",
     "number": "+18339916285",
     "source": "customer report"
+  },
+  {
+    "date_reported": "2026-11-09",
+    "label": "Fake $1,200 NestNegotiate loan text — loan bait claiming a loan was accepted",
+    "number": "+18449064483",
+    "source": "customer report"
   }
 ];

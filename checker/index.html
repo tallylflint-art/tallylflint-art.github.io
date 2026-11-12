@@ -38,6 +38,15 @@ footer{border-top:1px solid #999;margin-top:2em;padding-top:1em}
 </ol>
 <p>What you paste stays on your own device. Our checker reads it right here in your browser — the message itself is never sent anywhere.</p>
 
+
+<h2>One box checks it all</h2>
+<p>A message that feels off? A number you don't trust? <strong>Drop it in the box</strong> — a whole email, a text, or just a phone number. The checker figures out which one it is and hands you a straight answer.</p>
+<textarea id="anyInput" rows="5" placeholder="Paste the message here — or type the phone number"></textarea>
+<button class="go" id="anyBtn">Check it now</button>
+<div class="alertbox" id="anyAlert"></div>
+<div class="result" id="anyResult"></div>
+<p class="small">Rather check one kind at a time? The message box and the number box are right below.</p>
+
 <h2>Check a message</h2>
 <p>Paste the whole message — the more you paste, the better the check.</p>
 <textarea id="msgInput" rows="7" placeholder="Paste the suspicious text or email here"></textarea>
@@ -231,6 +240,61 @@ function analyzePhone(raw, reportedList){
   try{
     fetch('../scam-numbers.json').then(function(r){ return r.ok ? r.json() : null; }).then(mergeList).catch(function(){});
   }catch(e){}
+
+
+  document.getElementById('anyBtn').addEventListener('click', function(){
+    var raw = document.getElementById('anyInput').value || "";
+    var box = document.getElementById('anyResult');
+    var alertBox = document.getElementById('anyAlert');
+    alertBox.style.display = "none";
+    var trimmed = raw.replace(/^\s+|\s+$/g, "");
+    if (!trimmed){
+      box.style.display = "block"; box.className = "result warn";
+      box.innerHTML = "<strong>Drop something in the box first</strong> — paste the message, or type the phone number.";
+      return;
+    }
+    var digits = trimmed.replace(/\D/g, "");
+    var letters = trimmed.replace(/[^a-zA-Z]/g, "").length;
+    var otherChars = trimmed.replace(/[\d\s()+\-.a-zA-Z]/g, "").length;
+    var isPhone = false;
+    if (digits.length >= 7 && letters <= 4 && otherChars <= 2) isPhone = true;
+    if (digits.length >= 5 && digits.length <= 6 && letters === 0 && trimmed.length <= 8) isPhone = true;
+    if (isPhone){
+      hit('phone-checks'); hit('checks-own');
+      var link = document.getElementById('reportLink');
+      link.href = "mailto:tallylflint@gmail.com?subject=Reported%20scam%20number&body=" + encodeURIComponent("I want to report this number: " + trimmed);
+      var rp = analyzePhone(trimmed, reportedList);
+      if (rp.kind === "reported"){
+        alertBox.style.display = "block";
+        alertBox.innerHTML = "\u26A0\uFE0F Warning: other people reported this number as a scam.<br>" + esc(rp.label || "");
+      }
+      var clsp = rp.score >= 45 ? "danger" : (rp.score >= 20 ? "warn" : "safe");
+      var hp = '<p class="small">That looks like a <strong>phone number</strong> — here is the check:</p><div class="score">' + rp.score + ' / 100</div><p><strong>' + rp.verdict + '</strong></p><ul>';
+      for (var j=0;j<rp.notes.length;j++) hp += "<li>" + esc(rp.notes[j]) + "</li>";
+      hp += "</ul>";
+      box.style.display = "block"; box.className = "result " + clsp; box.innerHTML = hp;
+    } else {
+      if (trimmed.replace(/\s/g,"").length < 8){
+        box.style.display = "block"; box.className = "result warn";
+        box.innerHTML = "<strong>Paste a little more of the message first</strong> — a few words are not enough to check.";
+        return;
+      }
+      hit('msg-checks'); hit('checks-own');
+      var rm = analyzeMessage(trimmed);
+      var clsm = rm.score >= 45 ? "danger" : (rm.score >= 20 ? "warn" : "safe");
+      var hm = '<p class="small">That looks like a <strong>message</strong> — here is the check:</p><div class="score">' + rm.score + ' / 100</div><p><strong>' + rm.verdict + '</strong></p>';
+      if (rm.flags.length){
+        hm += "<p>What our checker found:</p><ul>";
+        for (var k=0;k<rm.flags.length;k++) hm += "<li>" + esc(rm.flags[k]) + "</li>";
+        hm += "</ul>";
+      }
+      if (rm.score >= 45) hm += "<p><strong>What to do:</strong> do not click, do not reply, do not pay. If it claims to be a company you use, contact that company yourself at its real number or website — never the one in the message.</p>";
+      else if (rm.score >= 20) hm += "<p><strong>What to do:</strong> slow down. Check the sender another way before you answer, and never send money or codes because a message asked.</p>";
+      else hm += "<p>No scam patterns matched. Still use your judgment — a new trick can look clean. If money, passwords, or codes are requested, stop and check another way.</p>";
+      hm += '<p class="small">Want human eyes on it? Try the Starter Check — our team checks one message AND one number for you, plus the Phone Cleaner app included so you can see how it works — <a href="https://buy.stripe.com/5kQ6oJfdb1nH8zLfCW28806">Starter Check, $10 one-time</a>.</p>';
+      box.style.display = "block"; box.className = "result " + clsm; box.innerHTML = hm;
+    }
+  });
 
   document.getElementById('phoneBtn').addEventListener('click', function(){
     var raw = document.getElementById('phoneInput').value;

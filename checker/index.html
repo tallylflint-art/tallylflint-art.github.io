@@ -63,11 +63,11 @@ footer{border-top:1px solid #999;margin-top:2em;padding-top:1em}
 <h2>Want our team to look at it for you?</h2>
 <p>The free checker is a machine. If you want human eyes on one message, our team offers:</p>
 <ul>
-<li><strong>Starter Check — $10, one-time.</strong> Our team checks ONE suspicious email or message and gives you a plain-English verdict: <a href="https://buy.stripe.com/5kQ6oJfdb1nH8zLfCW28806">https://buy.stripe.com/5kQ6oJfdb1nH8zLfCW28806</a></li>
+<li><strong>Starter Check — $10, one-time.</strong> A one-time taste of everything, once per customer: our team checks ONE suspicious message AND ONE phone number for you by hand, with plain-English verdicts, and you get the AntiScam™ Phone Cleaner app to try: <a href="https://buy.stripe.com/5kQ6oJfdb1nH8zLfCW28806">https://buy.stripe.com/5kQ6oJfdb1nH8zLfCW28806</a></li>
 <li><strong>Basic Audit — $19.99, one-time.</strong> Our team checks up to 10 emails plus your suspicious phone numbers, and it includes the AntiScam™ Phone Cleaner free — get BOTH: your email checked AND your phone cleaned: <a href="https://buy.stripe.com/8x2bJ34yx9Ud6rDaiC28807">https://buy.stripe.com/8x2bJ34yx9Ud6rDaiC28807</a></li>
 <li><strong>Deep Clean — $99, one-time.</strong> Our team's full inbox clean-out, and it also includes the Phone Cleaner free: <a href="https://buy.stripe.com/8x214p0ih6I117j62m28801">https://buy.stripe.com/8x214p0ih6I117j62m28801</a></li>
 </ul>
-<p>Nothing here is a subscription — every audit is a one-time payment with a 30-day money-back guarantee. The $10 Starter Check does not include the Phone Cleaner.</p>
+<p>Nothing here is a subscription — every audit is a one-time payment with a 30-day money-back guarantee. The $10 Starter Check is one taste per customer.</p>
 
 <h2>Already got scammed? Do this now</h2>
 <ol>
@@ -216,7 +216,7 @@ function analyzePhone(raw, reportedList){
     if (r.score >= 45) html += "<p><strong>What to do:</strong> do not click, do not reply, do not pay. If it claims to be a company you use, contact that company yourself at its real number or website — never the one in the message.</p>";
     else if (r.score >= 20) html += "<p><strong>What to do:</strong> slow down. Check the sender another way before you answer, and never send money or codes because a message asked.</p>";
     else html += "<p>No scam patterns matched. Still use your judgment — a new trick can look clean. If money, passwords, or codes are requested, stop and check another way.</p>";
-    html += '<p class="small">Want human eyes on it? Our team will check one message for you — <a href="https://buy.stripe.com/5kQ6oJfdb1nH8zLfCW28806">Starter Check, $10 one-time</a>.</p>';
+    html += '<p class="small">Want human eyes on it? Try the Starter Check — our team checks one message AND one number for you, plus the Phone Cleaner app to try — <a href="https://buy.stripe.com/5kQ6oJfdb1nH8zLfCW28806">Starter Check, $10 one-time</a>.</p>';
     box.style.display = "block"; box.className = "result " + cls; box.innerHTML = html;
   });
 

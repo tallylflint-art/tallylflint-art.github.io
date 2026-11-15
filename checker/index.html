@@ -103,7 +103,9 @@ var RULES = [
   {re:/(https?:\/\/|www\.|click here|tap here|bit\.ly|tinyurl|t\.co\/)/i, pts:12, flag:"Pushes you to click a link"},
   {re:/\$\s?\d[\d,]*(\.\d{2})?/, pts:12, flag:"Names a specific amount of money"},
   {re:/\b(irs|internal revenue|amazon|paypal|apple|microsoft|netflix|bank of america|wells fargo|chase bank|usps|fedex|social security administration|medicare)\b/i, pts:10, flag:"Uses the name of a big company or government agency"},
-  {re:/(do not tell|don't tell|keep (this|it) secret|between us|dear friend|beloved)/i, pts:8, flag:"Asks for secrecy or plays on your feelings"}
+  {re:/(do not tell|don't tell|keep (this|it) secret|between us|dear friend|beloved)/i, pts:8, flag:"Asks for secrecy or plays on your feelings"},
+  {re:/(?=[\s\S]*(this is my new number|new number,?\s?(it'?s|its) me|changed my number|lost my (phone|cell)|my phone (broke|is broken|died|was stolen|got stolen)|texting (you )?from a new number|using a friend'?s phone))(?=[\s\S]*(it'?s me\b|hi (mom|mum|dad|grandma|grandpa|mother|father|nana|papa)\b|this is your (son|daughter|grandson|granddaughter|kid|child)\b))/i, pts:28, flag:"New number / lost phone — classic family impersonation trick. Scammers text pretending to be your son, daughter, or grandkid from a 'new number' so you can't check who it really is. Always call the number you already have saved before you believe it — or send a cent to it."},
+  {re:/(don'?t call (my old|that|the old) (number|phone|one)|can'?t (talk|call) (right now|now)[^.!?]{0,20}text|just text (me|this number)|need (money|help) (fast|now|urgently)|i'?m in (jail|trouble)|stranded|in the hospital|had an accident)/i, pts:18, flag:"Cuts you off from the real person — 'don't call my old number'. Telling you NOT to call the number you trust is the trap. A real family member can wait 60 seconds while you call their real number and hear their actual voice."}
 ];
 function analyzeMessage(text){
   var score = 0, flags = [];

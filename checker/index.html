@@ -28,7 +28,7 @@ footer{border-top:1px solid #999;margin-top:2em;padding-top:1em}
 </style>
 </head>
 <body>
-<p class="trustbar">AntiScam™ — Columbus, Georgia. Our team helps seniors and kids spot scams before they cost money. The checker on this page is FREE — no card, no sign-up. Audits are PAID, one-time payments with a 30-day money-back guarantee. Questions? tallylflint@gmail.com</p>
+<p class="trustbar">AntiScam™ — Columbus, Georgia. Our team helps seniors and kids spot scams before they cost money. The checker on this page is FREE — no card, no sign-up. Questions? tallylflint@gmail.com</p>
 
 <h1>Is this message a scam? Check it free.</h1>
 <p>Got a text, email, or call that feels off? Do not guess. Check it first — it takes less than a minute.</p>
@@ -77,15 +77,7 @@ footer{border-top:1px solid #999;margin-top:2em;padding-top:1em}
 <p class="small">A real-looking number can still be faked by the caller — scammers can make any number show on your screen. If the caller claims to be a bank or a company, hang up and call that company's real number from its official website. Never trust the caller ID alone.</p>
 <p class="small">Got a call or text from a scam number? <a id="reportLink" href="mailto:tallylflint@gmail.com?subject=Reported%20scam%20number">Report this number</a> — our team checks every report before adding it to the shared warning list.</p>
 
-<p class="zone zone-paid">PAID — the section below costs money. One-time payments only — NOT a subscription.</p>
-<h2 id="paid">PAID — one-time help from our team</h2>
-<p>The free checker above is a machine. If you want human eyes on it, our team does it by hand:</p>
-<ul>
-<li><strong>Starter Check — $10 — one-time payment — NOT a subscription.</strong> Liked your free sample? Get the full starter pack: our team hand-checks one suspicious message AND one phone number, and the AntiScam™ Phone Cleaner app goes on your phone so you can try it out yourself. One per customer: <a href="https://buy.stripe.com/5kQ6oJfdb1nH8zLfCW28806">Get the $10 Starter Check</a></li>
-<li><strong>Basic Audit — $19.99 — one-time payment — NOT a subscription.</strong> Our team checks up to 10 emails plus your suspicious phone numbers, and it includes the AntiScam™ Phone Cleaner free — get BOTH: your email checked AND your phone cleaned: <a href="https://buy.stripe.com/8x2bJ34yx9Ud6rDaiC28807">Get the $19.99 Basic Audit</a></li>
-<li><strong>Deep Clean — $99 — one-time payment — NOT a subscription.</strong> Our team's full inbox clean-out, and it also includes the Phone Cleaner free: <a href="https://buy.stripe.com/8x214p0ih6I117j62m28801">Get the $99 Deep Clean</a></li>
-</ul>
-<p>Nothing here is a subscription — every audit is a one-time payment with a 30-day money-back guarantee. New here? Start with the FREE one-time sample in the free section above — one message and one number checked by hand, on us. See it work first, then decide.</p>
+<p>Want the whole thing? The full version lives on our <a href="https://muse.ai/s/antiscam-xch6xzxwx0xuxdxkxtm/cTpuLhO5Qilzz1zLcOVZBAHhwVIBLxfbSjkENwm6qe4">paid site</a>.</p>
 
 <h2>Already got scammed? Do this now</h2>
 <ol>
@@ -234,7 +226,7 @@ function analyzePhone(raw, reportedList){
     if (r.score >= 45) html += "<p><strong>What to do:</strong> do not click, do not reply, do not pay. If it claims to be a company you use, contact that company yourself at its real number or website — never the one in the message.</p>";
     else if (r.score >= 20) html += "<p><strong>What to do:</strong> slow down. Check the sender another way before you answer, and never send money or codes because a message asked.</p>";
     else html += "<p>No scam patterns matched. Still use your judgment — a new trick can look clean. If money, passwords, or codes are requested, stop and check another way.</p>";
-    html += '<p class="small">Want human eyes on it? Your first hand check is FREE — our team checks one message AND one number for you by hand, one free sample per person: email them to tallylflint@gmail.com and our team replies with the verdicts. After that, hand checks are PAID. <a href="#paid">See the PAID options below</a>.</p>';
+    html += '<p class="small">Want human eyes on it? Your first hand check is FREE — our team checks one message AND one number for you by hand, one free sample per person: email them to tallylflint@gmail.com and our team replies with the verdicts. Want the whole thing? The full version lives on our <a href="https://muse.ai/s/antiscam-xch6xzxwx0xuxdxkxtm/cTpuLhO5Qilzz1zLcOVZBAHhwVIBLxfbSjkENwm6qe4">paid site</a>.</p>';
     box.style.display = "block"; box.className = "result " + cls; box.innerHTML = html;
   });
 
@@ -300,7 +292,7 @@ function analyzePhone(raw, reportedList){
       if (rm.score >= 45) hm += "<p><strong>What to do:</strong> do not click, do not reply, do not pay. If it claims to be a company you use, contact that company yourself at its real number or website — never the one in the message.</p>";
       else if (rm.score >= 20) hm += "<p><strong>What to do:</strong> slow down. Check the sender another way before you answer, and never send money or codes because a message asked.</p>";
       else hm += "<p>No scam patterns matched. Still use your judgment — a new trick can look clean. If money, passwords, or codes are requested, stop and check another way.</p>";
-      hm += '<p class="small">Want human eyes on it? Your first hand check is FREE — our team checks one message AND one number for you by hand, one free sample per person: email them to tallylflint@gmail.com and our team replies with the verdicts. After that, hand checks are PAID. <a href="#paid">See the PAID options below</a>.</p>';
+      hm += '<p class="small">Want human eyes on it? Your first hand check is FREE — our team checks one message AND one number for you by hand, one free sample per person: email them to tallylflint@gmail.com and our team replies with the verdicts. Want the whole thing? The full version lives on our <a href="https://muse.ai/s/antiscam-xch6xzxwx0xuxdxkxtm/cTpuLhO5Qilzz1zLcOVZBAHhwVIBLxfbSjkENwm6qe4">paid site</a>.</p>';
       box.style.display = "block"; box.className = "result " + clsm; box.innerHTML = hm;
     }
   });

@@ -100,5 +100,39 @@ footer{border-top:1px solid #999;margin-top:2em;padding-top:1em}
 <p>¿Preguntas? Escribe a nuestro equipo a tallylflint@gmail.com.</p>
 <footer>AntiScam™, Columbus, Georgia. ¿Preguntas? tallylflint@gmail.com<p><strong>Ayúdame a ayudarte™</strong></p></footer>
 <script>(function(){try{fetch('https://abacus.jasoncameron.dev/hit/antiscam-counter-x9k2/page-donde-reportar-una-estafa',{keepalive:true}).catch(function(){});}catch(e){}})();</script>
+
+<script>
+(function(){
+var noCount=0, target=null;
+var ov=document.createElement('div');
+ov.style.cssText='display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;padding:1em;box-sizing:border-box;overflow:auto';
+ov.innerHTML='<div style="background:#fff;color:#111;max-width:32em;margin:8vh auto;padding:1.2em;border:2px solid #111">'
++'<p style="font-size:1.15em;margin-top:0"><strong>Antes de ir a la página de pago</strong></p>'
++'<p>Está a punto de ir a la página segura de pago de Stripe. ¿Acepta los <a href="https://tallylflint-art.github.io/service-terms/" target="_blank" rel="noopener">AntiScam\u2122 Términos del Servicio</a> \u2014 incluida la <strong>garantía de devolución de 30 días</strong> \u2014 y quiere continuar?</p>'
++'<p id="asg-msg" style="font-weight:bold"></p>'
++'<p><button id="asg-yes" type="button" style="font-size:1.1em;padding:.6em 1.2em;margin-right:.6em;cursor:pointer">SÍ \u2014 llévame a la página de pago</button>'
++'<button id="asg-no" type="button" style="font-size:1.1em;padding:.6em 1.2em;cursor:pointer">NO \u2014 volver</button></p></div>';
+document.body.appendChild(ov);
+var msg=ov.querySelector('#asg-msg');
+function decline(){
+  document.querySelectorAll('a[href*="buy.stripe.com"]').forEach(function(a){a.style.opacity='.45';});
+  alert('Compra rechazada. No hay problema \u2014 puede volver cuando quiera.');
+}
+ov.querySelector('#asg-yes').addEventListener('click',function(){var t=target;ov.style.display='none';if(t){window.location.href=t;}});
+ov.querySelector('#asg-no').addEventListener('click',function(){
+  noCount++; ov.style.display='none';
+  if(noCount>=2){decline();}
+});
+document.querySelectorAll('a[href*="buy.stripe.com"]').forEach(function(a){
+  a.addEventListener('click',function(ev){
+    ev.preventDefault();
+    if(noCount>=2){decline();return;}
+    target=a.href;
+    msg.textContent = noCount===1 ? 'Ya dijo que no una vez. Lea los términos y elija de nuevo \u2014 un segundo no rechaza la compra.' : '';
+    ov.style.display='block';
+  });
+});
+})();
+</script>
 </body>
 </html>

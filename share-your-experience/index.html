@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Share Your Experience — AntiScam™</title>
+<meta name="description" content="Used the AntiScam™ free checker, a hand-check, an audit, or one of our off-grid products? Tell our team how it went — honest words help the next person decide.">
+<style>
+body{font-family:-apple-system,Arial,Helvetica,sans-serif;font-size:19px;line-height:1.65;color:#111;max-width:44em;margin:0 auto;padding:1em}
+.trustbar{border:2px solid #111;padding:.75em;font-weight:bold}
+h1{font-size:1.6em;line-height:1.25}
+h2{font-size:1.25em;margin-top:1.5em}
+a{color:#0b4da2}
+label{display:block;margin-top:1em;font-weight:bold}
+input,select,textarea{font-size:1em;width:100%;padding:.5em;margin-top:.25em;box-sizing:border-box}
+.check{font-weight:normal}
+.check input{width:auto}
+button{font-size:1.05em;font-weight:bold;padding:.7em 1.2em;margin-top:1.2em;cursor:pointer}
+footer{border-top:1px solid #999;margin-top:2em;padding-top:1em}
+</style>
+</head>
+<body>
+<p class="trustbar">AntiScam™ — Columbus, Georgia. Our team helps seniors and kids spot scams before they cost money. The checker is FREE — no card, no sign-up. Questions? tallylflint@gmail.com</p>
+<h1>Tell Us Your Experience</h1>
+<p>Did you use our <a href="https://tallylflint-art.github.io/checker/">free checker</a>, take the free sample, buy a hand-check or an audit, or order one of our off-grid products? Our team wants to hear how it went — <strong>good or bad</strong>. Honest words help the next person decide, and they help our team fix what needs fixing.</p>
+<h2>Send your experience</h2>
+<p>Fill in as much or as little as you like, then tap the button. It opens your email app with everything written out — you just press send. Nothing is posted anywhere until our team reads it first.</p>
+<form id="expform">
+<label for="fname">Your first name (optional — if we post your words, only your first name shows)</label>
+<input id="fname" type="text" autocomplete="given-name">
+<label for="used">What did you use?</label>
+<select id="used">
+<option>Free Scam Checker</option>
+<option>Free sample hand-check</option>
+<option>Starter Check ($10)</option>
+<option>Basic Audit ($19.99)</option>
+<option>Deep Clean ($99)</option>
+<option>Emergency Solar Kit / off-grid product</option>
+<option>Something else</option>
+</select>
+<label for="exp">Your experience — a few plain sentences is plenty</label>
+<textarea id="exp" rows="6"></textarea>
+<label class="check"><input id="ok" type="checkbox" checked> You may post my experience on this page with my first name only.</label>
+<button type="submit">Send my experience</button>
+</form>
+<p>If the button doesn't open your email, just write to us at <a href="mailto:tallylflint@gmail.com">tallylflint@gmail.com</a> — a few plain sentences is plenty.</p>
+<h2>What people are saying</h2>
+<p>No experiences posted yet — yours could be the first one here.</p>
+<h2>Our other sites</h2>
+<ul>
+<li><a href="https://tallylflint-art.github.io/checker/">Free Scam Checker</a> — check a suspicious message or phone number free, as often as you like.</li>
+<li><a href="https://muse.ai/s/antiscam-xch6xzxwx0xuxdxkxtm/cTpuLhO5Qilzz1zLcOVZBAHhwVIBLxfbSjkENwm6qe4">AntiScam™ main site</a> — the hand-checks and audits: Starter Check, Basic Audit, and Deep Clean.</li>
+<li><a href="https://tallylflint-art.github.io/solar-kit/">Emergency Solar Kit</a> and the <a href="https://tallylflint-art.github.io/off-grid/">Off-Grid Store</a> — power when the grid goes down.</li>
+<li><a href="https://tallylflint-art.github.io/far-side-wire/">The Far Side Wire</a> — the record, on the record.</li>
+<li><a href="https://www.youtube.com/@tallylflint">AntiScam™ on YouTube</a> — scam teardowns and how-to videos. Subscribe — it's free.</li>
+<li><a href="https://www.youtube.com/@TheyPickedTheWrongPlanet">They Picked the Wrong Planet</a> — our sci-fi story series on YouTube. Subscribe — it's free.</li>
+<li><a href="https://tallylflint-art.github.io/updates/">Product Updates</a> — what's new at AntiScam™.</li>
+<li><a href="https://tallylflint-art.github.io/service-terms/">Service Terms</a> — the guarantee, the refund rules, and how confirmations work, in plain words.</li>
+</ul>
+<footer>help me help you™ — AntiScam™, Columbus, Georgia. Questions? tallylflint@gmail.com</footer>
+<script>
+document.getElementById('expform').addEventListener('submit',function(e){
+e.preventDefault();
+var name=document.getElementById('fname').value.trim();
+var used=document.getElementById('used').value;
+var exp=document.getElementById('exp').value.trim();
+var ok=document.getElementById('ok').checked?'Yes — you may post this with my first name only.':'No — please do not post this; it is feedback for the team only.';
+var body='What I used: '+used+'\n\nMy experience:\n'+exp+'\n\nPosting permission: '+ok+'\n\n— '+(name?name:'(no name given)');
+window.location.href='mailto:tallylflint@gmail.com?subject='+encodeURIComponent('My AntiScam experience')+'&body='+encodeURIComponent(body);
+});
+</script>
+<script>(function(){try{fetch('https://abacus.jasoncameron.dev/hit/antiscam-counter-x9k2/page-share-your-experience',{keepalive:true}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>

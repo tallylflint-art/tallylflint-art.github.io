@@ -10,7 +10,7 @@ body{font-family:-apple-system,Arial,Helvetica,sans-serif;font-size:19px;line-he
 .trustbar{border:2px solid #111;padding:.75em;font-weight:bold}
 h1{font-size:1.6em;line-height:1.25}
 h2{font-size:1.3em;margin-top:1.6em}
-textarea,input[type=text]{width:100%;box-sizing:border-box;font-size:19px;padding:.6em;border:2px solid #555;border-radius:6px}
+textarea,input[type=text],input[type=password]{width:100%;box-sizing:border-box;font-size:19px;padding:.6em;border:2px solid #555;border-radius:6px}
 button.go{background:#0b4da2;color:#fff;font-size:20px;font-weight:bold;border:0;border-radius:6px;padding:.6em 1.2em;cursor:pointer;margin-top:.5em}
 button.sample{background:#eef3fa;border:1px solid #0b4da2;color:#0b4da2;border-radius:20px;padding:.3em .9em;margin:.2em .2em .2em 0;cursor:pointer;font-size:16px}
 .result{border:2px solid #555;border-radius:8px;padding:1em;margin-top:1em;display:none}
@@ -78,6 +78,30 @@ footer{border-top:1px solid #999;margin-top:2em;padding-top:1em}
 <div class="result" id="phoneResult"></div>
 <p class="small">A real-looking number can still be faked by the caller — scammers can make any number show on your screen. If the caller claims to be a bank or a company, hang up and call that company's real number from its official website. Never trust the caller ID alone.</p>
 <p class="small">Got a call or text from a scam number? <a id="reportLink" href="mailto:tallylflint@gmail.com?subject=Reported%20scam%20number">Report this number</a> — our team checks every report before adding it to the shared warning list.</p>
+
+<h2>Was your email in a data breach?</h2>
+<p>When a company's computers get broken into, your email address and password can end up in a stolen list that scammers trade. There is a free, trusted way to find out if your email is in one of those lists — it is run by an independent security researcher, not by us:</p>
+<p><a href="https://haveibeenpwned.com/"><strong>Check your email free at haveibeenpwned.com</strong></a></p>
+<ol>
+<li>Type your email address in the box on that page and press the button.</li>
+<li>If it says <strong>"Oh no — pwned!"</strong> your email was in a stolen list. Change the password on that account right away — and anywhere else you used the same password.</li>
+<li>Turn on two-step verification (the kind that sends a code to your phone) on your email and bank accounts. It stops scammers cold, even if they have your password.</li>
+</ol>
+<p class="small">The check happens on their page — we never see your email address. It is free, and you do not need an account.</p>
+
+<h2>Check a password — has it been leaked?</h2>
+<p>Type a password below and our checker will tell you if that exact password has shown up in stolen lists. <strong>Your password never leaves your device</strong> — the checker scrambles it and only sends the first few scrambled characters, then does the matching right here on your phone or computer.</p>
+<input type="password" id="pwInput" placeholder="Type a password to check it" autocomplete="off">
+<button class="go" id="pwBtn">Check this password</button>
+<div class="result" id="pwResult"></div>
+<p class="small">Never type a password into a page a text or email sent you to. This page is safe for this check because the password itself is never sent anywhere — but make that a habit everywhere else.</p>
+
+<h2>Put AntiScam™ on your home screen</h2>
+<p>So the checker is always one tap away, like an app:</p>
+<ul>
+<li><strong>Android:</strong> open this page in Chrome, tap the three dots (⋮) at the top, then tap <strong>"Add to Home screen."</strong></li>
+<li><strong>iPhone:</strong> open this page in Safari, tap the Share button (the square with an arrow), then tap <strong>"Add to Home Screen."</strong></li>
+</ul>
 
 <h2>Want protection that runs all the time?</h2>
 <p>Checking one number or message at a time helps — some people also want protection that runs all the time. <strong>Aura</strong> is an identity protection service with credit monitoring and identity theft protection.</p>
@@ -336,5 +360,41 @@ function analyzePhone(raw, reportedList){
 })();
 </script>
 <script>(function(){try{fetch('https://abacus.jasoncameron.dev/hit/antiscam-counter-x9k2/page-checker',{keepalive:true}).catch(function(){});}catch(e){}})();</script>
+<script>
+(function(){
+  var btn = document.getElementById('pwBtn');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var pw = document.getElementById('pwInput').value;
+    var box = document.getElementById('pwResult');
+    function show(cls, html){ box.style.display = "block"; box.className = "result " + cls; box.innerHTML = html; }
+    if (!pw){ show("warn", "<strong>Type a password first</strong> — then press the check button."); return; }
+    if (!window.crypto || !crypto.subtle){ show("warn", "<strong>Your browser is too old for this check.</strong> Try a newer browser, and never reuse the same password on more than one account."); return; }
+    show("warn", "Checking… one moment.");
+    try{ fetch('https://abacus.jasoncameron.dev/hit/antiscam-counter-x9k2/pw-checks',{keepalive:true}).catch(function(){}); }catch(e){}
+    var enc = new TextEncoder().encode(pw);
+    crypto.subtle.digest('SHA-1', enc).then(function(buf){
+      var bytes = new Uint8Array(buf), hex = "";
+      for (var i=0;i<bytes.length;i++){ var h = bytes[i].toString(16); hex += (h.length===1?"0":"") + h; }
+      hex = hex.toUpperCase();
+      var prefix = hex.slice(0,5), suffix = hex.slice(5);
+      return fetch('https://api.pwnedpasswords.com/range/' + prefix).then(function(r){ return r.text(); }).then(function(text){
+        var lines = text.split('\n'), found = 0;
+        for (var j=0;j<lines.length;j++){
+          var parts = lines[j].split(':');
+          if (parts[0].replace(/\s/g,"") === suffix){ found = parseInt(parts[1],10) || 0; break; }
+        }
+        if (found > 0){
+          show("danger", "<p><strong>Yes — this password has been leaked.</strong></p><p>It showed up in stolen password lists <strong>" + found.toLocaleString() + " times</strong>. Scammers try leaked passwords first. If you use this password anywhere, change it there now — and never use the same password on two accounts.</p>");
+        } else {
+          show("safe", "<p><strong>Good news — this password was not found in the stolen lists.</strong></p><p>That is a good sign, not a guarantee. Still use a different password for every account, and turn on two-step verification for your email and bank.</p>");
+        }
+      });
+    }).catch(function(){
+      show("warn", "<strong>The check could not finish</strong> — your connection may have hiccuped. Try once more. When in doubt, use a long password you have never used anywhere else.");
+    });
+  });
+})();
+</script>
 </body>
 </html>
